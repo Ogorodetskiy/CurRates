@@ -53,10 +53,10 @@
 request_exe.py (получение ответа от сервиса) 
 
 ### Layer2 (converting the response to the python type)
-xml_parse  преобразование XML, произвольной формы, к типу tuple (кортеж)
+xml_parse.py  преобразование XML, произвольной формы, к типу tuple (кортеж)
 
 ### layer3 (SQL)
-sql_native.py  (nativ SQL)
+sql_native.py  (nativ SQL)<br>
 ORM_result.py (SQLAlchemy 2.0)
 
 
