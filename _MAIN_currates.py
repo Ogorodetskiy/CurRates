@@ -1,7 +1,7 @@
 from xml_parse import xml2tuple, currency_rates
 
-from requests_exe import requests_cb_rf
-from sql_merge import currency_rate_merge, clear_temp_table, exchange_rates_transfer as ert
+from requests_exe import get_answer
+from sql_native import currency_rate_merge, clear_temp_table, exchange_rates_transfer as ert
 
 from ORM_result import parameters_str as pps, get_rn_by_code, curs_rate_last_day
 
@@ -21,7 +21,7 @@ def main(s_date: str, cur_type: str):
 
     if cur_type == 'CBRF':
         s_path = pps('CB_RF_ALL_CUR_RATES_DAILY')
-        cur_list = currency_rates(xml2tuple(xml=requests_cb_rf(s_path, {'date_req': s_date})))
+        cur_list = currency_rates(xml2tuple(xml=get_answer(s_path, {'date_req': s_date})))
 
         # Найдем курс валюты номинала - RUB
         nom_currency = get_rn_by_code('CURNAMES', 'RUB')

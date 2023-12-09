@@ -1,7 +1,7 @@
 import requests
 
 
-def requests_cb_rf(s_path, params_dict):
+def get_answer(s_path, params_dict):
 
     """
         Возвращает XML с сайта s_path, параметрами   params_dict
@@ -25,4 +25,4 @@ def requests_cb_rf(s_path, params_dict):
 if __name__ == '__main__':
     from program_parameters import parameters_str
 
-    print(requests_cb_rf(parameters_str('CB_RF_ALL_CUR_RATES_DAILY'), {'date_req': '20/02/2023'}))
+    print(get_answer(parameters_str('CB_RF_ALL_CUR_RATES_DAILY'), {'date_req': '20/02/2023'}))

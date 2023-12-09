@@ -56,7 +56,6 @@ def get_rn_by_code(table_name: str, scode: str):
 
     prm = table(table_name, column("RN"), column("code"))
 
-
     with engine.connect() as con:
 
         result = con.execute(select(prm.c.RN).where((prm.c.code == scode))).fetchone()
