@@ -62,6 +62,8 @@ def exchange_rates_transfer(srate_type: str):
 
     nrate_type = get_rn_by_code(table_name='exchange_rates_types', scode=srate_type)
 
+
+
     # Перенос данных из временной таблицы imp_cur_rates в рабочую таблицу  exchange_rates
     sql_transfer = """insert into exchange_rates(rate_date, rate_type, currency, nominal, curval)
                        select t.date_value, 1, cn.rn, t.nominal, t.value

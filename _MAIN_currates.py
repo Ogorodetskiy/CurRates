@@ -14,17 +14,17 @@ from datetime import datetime
 # пример всех запросов https://cbr.ru/development/SXML/
 
 
-def load_all_curse(s_date: str, cur_type: str):
+def main(s_date: str, cur_type: str):
     """
     Строка s_date Дата в формате dd/mm/yyyy
     """
-    print(cur_type)
+
     if cur_type == 'CBRF':
         s_path = pps('CB_RF_ALL_CUR_RATES_DAILY')
         cur_list = currency_rates(xml2tuple(xml=requests_cb_rf(s_path, {'date_req': s_date})))
-        # Найдем курс валюты номинала - RUB
 
-        nom_currency = get_rn_by_code('CURRENCY', 'RUB')
+        # Найдем курс валюты номинала - RUB
+        nom_currency = get_rn_by_code('CURNAMES', 'RUB')
 
     else:
         print(f'Для типа курса {cur_type} загрузка еще не описана!')
@@ -51,7 +51,7 @@ def main_period(date_beg: str, date_end: str, cur_type: str):
 
     for i in range(delta):
 
-        load_all_curse(s_date=(d1 + timedelta(days=i)).strftime("%d/%m/%Y"), cur_type=cur_type)
+        main(s_date=(d1 + timedelta(days=i)).strftime("%d/%m/%Y"), cur_type=cur_type)
 
 
 def main_until_current_date(cur_type: str):

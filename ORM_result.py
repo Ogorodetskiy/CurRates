@@ -13,6 +13,7 @@ def parameters_str(s_code: str):
     """
     Функция возвращает значение параметра тип строка, с заданным кодом из таблицы parameters
     """
+
     prm = table("parameters", column("val_str"), column("code"))
 
     with engine.connect() as con:
@@ -55,11 +56,14 @@ def get_rn_by_code(table_name: str, scode: str):
 
     prm = table(table_name, column("RN"), column("code"))
 
+
     with engine.connect() as con:
+
         result = con.execute(select(prm.c.RN).where((prm.c.code == scode))).fetchone()
         r = result
 
         return r[0] if r is not None else None
+
 
 def curs_rate(nrate_types: int, currency: int, sdate: str):
     """
@@ -98,14 +102,14 @@ def curs_rate_last_day(cur_type: str):
 
 if __name__ == '__main__':
 
-    """
-    print('Rn типа курса')
-    print(get_rn_by_code('exchange_rates_types', 'CBRF'))
-    print('Rn валюты')
-    print(get_rn_by_code('curnames', 'R01235'))
+    print(db_path)
+    # print('Rn типа курса')
+    print(get_rn_by_code('CURRENCY', 'RUB'))
+    # print('Rn валюты')
+    # print(get_rn_by_code('curnames', 'R01235'))
 
-    print(parameters_date('DATE_TEST'))
-    """
+    # print(parameters_date('DATE_TEST'))
+
     # rate_types = get_rn_by_code('exchange_rates_types', 'CBRF')
     # currency1 = get_rn_by_code('curnames', 'R01235')
     # sdate1 = '17-03-2023'
@@ -113,4 +117,5 @@ if __name__ == '__main__':
     # print(curs_rate(rate_types, currency1, sdate1))
 
     # print(get_currency_rn('RUB'))
-    print(curs_rate_last_day('CBRF'))
+
+    # print(curs_rate_last_day('CBRF'))
