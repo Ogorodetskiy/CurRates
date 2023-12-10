@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine, column, select, table, func
 
-from program_parameters import db_path
+from program_parameters import load_config_one_prm
 
-engine = create_engine('sqlite:///'+db_path, echo=False)
+engine = create_engine(load_config_one_prm('DB', 'engine') +
+                       load_config_one_prm('DB', 'db_path'))
 
 
 def from_date(sdate):
@@ -100,10 +101,8 @@ def curs_rate_last_day(cur_type: str):
 
 
 if __name__ == '__main__':
-
-    print(db_path)
     # print('Rn типа курса')
-    print(get_rn_by_code('CURRENCY', 'RUB'))
+    print(get_rn_by_code('CURNAMES', 'R00000'))
     # print('Rn валюты')
     # print(get_rn_by_code('curnames', 'R01235'))
 

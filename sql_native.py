@@ -1,9 +1,10 @@
 import sqlite3
-import program_parameters as pp
+
+from program_parameters import load_config_one_prm
 from ORM_result import from_date, get_rn_by_code
 
 try:
-    db_path = pp.db_path
+    db_path = load_config_one_prm('DB', 'db_path')
 
     conn = sqlite3.connect(db_path)
     print(f"База данных {db_path} успешно подключена к SQLite")
@@ -17,7 +18,6 @@ cursor = conn.cursor()
 def clear_temp_table():
     
     # Очистим таблицу загрузки
-
     cursor.execute('delete from imp_cur_rates')
 
 
@@ -53,7 +53,8 @@ def currency_rate_merge(itemid, numcode, charcode, nominal, name, value, date_va
                    VALUES (?, ?, ?,?, ? ,?, ?, ?)"""
 
     cursor.execute(sqlite_insert_query,
-                   (itemid, numcode, charcode, nominal, name, value.replace(',', '.'), from_date(date_value), nnom_currency ))
+                   (itemid, numcode, charcode, nominal, name, value.replace(',', '.'),
+                    from_date(date_value), nnom_currency))
 
     conn.commit()
 
@@ -61,8 +62,6 @@ def currency_rate_merge(itemid, numcode, charcode, nominal, name, value, date_va
 def exchange_rates_transfer(srate_type: str):
 
     nrate_type = get_rn_by_code(table_name='exchange_rates_types', scode=srate_type)
-
-
 
     # Перенос данных из временной таблицы imp_cur_rates в рабочую таблицу  exchange_rates
     sql_transfer = """insert into exchange_rates(rate_date, rate_type, currency, nominal, curval)
