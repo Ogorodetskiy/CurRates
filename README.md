@@ -5,13 +5,13 @@
 Является методом класса работы с валютами более крупной системы.
 
 ## Settings
-Таблица настроек
+ini file encoding="utf-8"
 <table>
    <thead>
         <tr>
            <th>N</th>
-           <th>sourcer</th>
-           <th>parametr</th>
+           <th>section</th>
+           <th>code</th>
            <th>description</th>
            <th>example</th>
         </tr>
@@ -19,7 +19,7 @@
    <tbody>
        <tr>
           <td>1</td>
-          <td>program_parametrs.py</td>
+          <td>DB</td>
           <td>db_path</td>
           <td>the path to the database</td>
           <td>D:\\MY_SCRIPTS\\_CurRate_2023\\DB\\CURRENCY.db</td>
@@ -27,25 +27,32 @@
   </tr>
    <tr>
           <td>2</td>
-          <td>CURRENCY.parameters</td>
-          <td>CB_RF_ALL_CUR_RATES_DAILY</td>
-          <td>the address for receiving the exchange rates of all currencies on a certain day</td>
-          <td>https://cbr.ru/scripts/XML_daily.asp</td>
+          <td>DB</td>
+          <td>engine</td>
+          <td>database management system (DBMS)</td>
+          <td>sqlite:///</td>
          
   </tr>
   <tr>
           <td>3</td>
-          <td>CURRENCY.parameters</td>
-          <td>CB_RF_ONE_CUR_RATE</td>
-          <td>The address for receiving the exchange rates of a specific currency for the period</td>
-          <td>https://cbr.ru/scripts/XML_dynamic.asp</td>
+          <td>Program</td>
+          <td>path</td>
+          <td>The path to the database</td>
+          <td>D:\MY_SCRIPTS\_CurRate_2023\</td>
          
   </tr>
+ <tr>
+          <td>4</td>
+          <td>Program</td>
+          <td>file_currencv_names</td>
+          <td>The path to the file from which the currency names are loaded</td>
+          <td>Справочник валют.txt</td>
+         
+  </tr>
+  
 </tbody>
 </table>
 
-Путь к базе данных хранится в файле program_parametrs.py   (передедать на yaml файл)<br>
-Путь к сервису хранится в самой базе данных в таблице parameters
 
 ## Structure
 
