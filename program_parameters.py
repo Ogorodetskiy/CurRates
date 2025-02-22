@@ -1,8 +1,5 @@
 from configparser import ConfigParser
 
-from sqlalchemy import create_engine, column, table
-import configparser
-
 """
 db_path = 'D:\\MY_SCRIPTS\\_CurRate_2023\\DB\\CURRENCY.db'
 path_main = 'D:\\MY_SCRIPTS\\_CurRate_2023\\'
@@ -12,10 +9,12 @@ engine = create_engine('sqlite:///'+db_path)
 prm = table("parameters", column("val_str"), column("code"))
 """
 
+
 def read_config():
-    my_config = configparser.ConfigParser()
+    my_config = ConfigParser()
     my_config.read('currate_settings.ini', encoding="utf-8")
     return my_config
+
 
 def load_config_one_prm(section, code):
     config = read_config()

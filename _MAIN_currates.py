@@ -33,7 +33,6 @@ def main(s_date: str, cur_type: str):
     clear_temp_table()
 
     for i in cur_list:
-
         # Запишем полученное из сервиса во временную таблицу
         currency_rate_merge(i[0], i[1], i[2], i[3], i[4], i[5], s_date, nom_currency)
 
@@ -43,19 +42,16 @@ def main(s_date: str, cur_type: str):
 
 
 def main_period(date_beg: str, date_end: str, cur_type: str):
-
     d1 = datetime.strptime(date_beg, '%d/%m/%Y')
     d2 = datetime.strptime(date_end, '%d/%m/%Y')
 
-    delta = (d2 - d1).days+1
+    delta = (d2 - d1).days + 1
 
     for i in range(delta):
-
         main(s_date=(d1 + timedelta(days=i)).strftime("%d/%m/%Y"), cur_type=cur_type)
 
 
 def main_until_current_date(cur_type: str):
-
     d1 = curs_rate_last_day(cur_type)
     sd1 = d1[8:10] + '/' + d1[5:7] + '/' + d1[0:4]  # строка последний загруженный курс
     sd2 = datetime.today().strftime('%d/%m/%Y')  # строка сегодняшнее число
@@ -63,6 +59,7 @@ def main_until_current_date(cur_type: str):
     if sd1 == sd2:
         print(f'\033[34mКурсы на дату\033[31m {sd1} \033[34mуже загружены')
     else:
+
         main_period(sd1, sd2, cur_type)
 
 

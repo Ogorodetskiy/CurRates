@@ -1,4 +1,5 @@
 import sqlite3
+from sqlite3 import Cursor
 
 from program_parameters import load_config_one_prm
 from ORM_result import from_date, get_rn_by_code
@@ -12,7 +13,7 @@ try:
 except sqlite3.Error as error:
     print(f"Ошибка при подключении к sqlite базы данных {db_path}", error)
 
-cursor = conn.cursor()
+cursor: Cursor = conn.cursor()
 
 
 def clear_temp_table():
@@ -40,7 +41,7 @@ def currency_name_merge(itemid, cur_name, eng_name, nominal, parent_code):
         # такой валюты нет, добавляем
         cursor.execute(sqlite_insert_query,
                        (itemid, cur_name, eng_name, nominal,  parent_code))
-        print(itemid)
+        # print(itemid)
 
     conn.commit()
 
